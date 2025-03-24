@@ -1,0 +1,60 @@
+{
+    "affiliationrel": [
+        "aff_id",
+        "agent_id",
+        "affiliation_strength"
+    ],
+    "agent": [
+        "agent_id",
+        "first",
+        "middle",
+        "last",
+        "address",
+        "city",
+        "country",
+        "salary",
+        "clearance_id"
+    ],
+    "language": [
+        "lang_id",
+        "language"
+    ],
+    "languagerel": [
+        "lang_id",
+        "agent_id"
+    ],
+    "mission": [
+        "mission_id",
+        "name",
+        "access_id",
+        "team_id",
+        "mission_status"
+    ],
+    "securityclearance": [
+        "sc_id",
+        "sc_level",
+        "description"
+    ],
+    "skill": [
+        "skill_id",
+        "skill"
+    ],
+    "skillrel": [
+        "skill_id",
+        "agent_id"
+    ],
+    "teamrel": [
+        "team_id",
+        "agent_id"
+    ],
+    "team": [
+        "team_id",
+        "name",
+        "meeting_frequency"
+    ],
+    "affiliation": [
+        "aff_id",
+        "title",
+        "description"
+    ]
+}

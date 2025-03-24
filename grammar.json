@@ -1,0 +1,40 @@
+{
+    "grammar": "Extended Grammar",
+    "syntax": {
+        "not_op": "not",
+        "and_op": "and",
+        "or_op": "or",
+
+        "params_start": "_{",
+        "params_stop": "}",
+        "paren_left": "(",
+        "paren_right": ")",
+
+        "equal_op": "=",
+        "not_equal_op": "!=",
+        "not_equal_alt_op": "<>",
+        "less_than_op": "<",
+        "less_than_equal_op": "<=",
+        "greater_than_op": ">",
+        "greater_than_equal_op": ">=",
+
+        "select_op": "sigma",
+        "project_op": "pi",
+        "rename_op": "rho",
+        "assign_op": "leftarrow",
+
+        "join_op": "times",
+        "theta_join_op": "theta",
+        "natural_join_op": "bowtie",
+        "leftouter_join_op": "leftouterjoin",
+        "rightouter_join_op": "rightouterjoin",
+        "fullouter_join_op": "fullouterjoin",
+        "theta_leftouter_join_op": "lojc",
+        "theta_rightouter_join_op": "rojc",
+        "theta_fullouter_join_op": "fojc",
+
+        "union_op": "cup",
+        "difference_op": "-",
+        "intersect_op": "cap"   
+    }
+}

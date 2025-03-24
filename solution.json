@@ -1,0 +1,29 @@
+[
+    [
+        "SELECT a.first, a.last, f.title AS affiliation_title, r.affiliation_strength FROM agent AS a JOIN affiliationrel AS r ON a.agent_id = r.agent_id JOIN affiliation AS f ON r.aff_id = f.aff_id WHERE r.affiliation_strength = 'strong';"
+    ],
+    [
+        "SELECT a.first, a.last, s.skill FROM agent AS a, skillrel AS sr, skill AS s WHERE a.agent_id = sr.agent_id AND s.skill_id = sr.skill_id AND a.salary > 80000;"
+    ],
+    [
+        "SELECT mission.name AS mission_name, team.name AS team_name FROM mission JOIN team ON mission.team_id = team.team_id WHERE mission.mission_status = 'failed' AND mission.access_id = 1;"
+    ],
+    [
+        "SELECT agent_id FROM affiliationrel WHERE affiliation_strength = 'weak' UNION SELECT agent_id FROM affiliationrel WHERE affiliation_strength = 'medium';"
+    ],
+    [
+        "SELECT agent.agent_id, agent.last, skill.skill FROM agent JOIN skillrel ON agent.agent_id = skillrel.agent_id JOIN skill ON skill.skill_id = skillrel.skill_id WHERE agent.country = 'Italy' AND agent.agent_id IN (SELECT skillrel.agent_id FROM skillrel JOIN skill ON skill.skill_id = skillrel.skill_id WHERE skill.skill = 'Firearms' EXCEPT SELECT skillrel.agent_id FROM skillrel JOIN skill ON skill.skill_id = skillrel.skill_id WHERE skill.skill = 'Sniper');"
+    ],
+    [
+        "SELECT a.agent_id, a.first, a.last, r.affiliation_strength, f.title AS affiliation_title FROM agent AS a LEFT JOIN affiliationrel AS r ON a.agent_id = r.agent_id LEFT JOIN affiliation AS f ON r.aff_id = f.aff_id;"
+    ],
+    [
+        "SELECT DISTINCT agent_id, first, last, country, salary FROM agent a1 WHERE NOT EXISTS (SELECT 1 FROM agent a2 WHERE a2.salary > a1.salary AND a2.country = a1.country);"
+    ],
+    [
+        "SELECT DISTINCT a1.agent_id AS agent1_id, a1.first AS agent1_first, a1.last AS agent1_last, a2.agent_id AS agent2_id, a2.first AS agent2_first, a2.last AS agent2_last, aff.title AS affiliation, a1.clearance_id FROM affiliationrel ar1 JOIN affiliationrel ar2 ON ar1.aff_id = ar2.aff_id AND ar1.agent_id <> ar2.agent_id JOIN agent a1 ON ar1.agent_id = a1.agent_id JOIN agent a2 ON ar2.agent_id = a2.agent_id AND a1.clearance_id = a2.clearance_id JOIN affiliation aff ON ar1.aff_id = aff.aff_id;"
+    ],
+    [
+        "SELECT DISTINCT agent_id FROM languagerel l1 GROUP BY agent_id HAVING COUNT(*) = (SELECT COUNT(*) FROM language);"
+    ]
+]

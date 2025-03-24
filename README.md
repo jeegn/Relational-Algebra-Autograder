@@ -13,26 +13,32 @@ This repository contains an **automated grading tool for Relational Algebra (RA)
 - Provides detailed feedback with intermediate RA-to-SQL translation.
 
 This project extends [pyrapt/rapt](https://github.com/pyrapt/rapt) with:
-- ✅ Self-joins and relation aliasing
-- ✅ Outer joins: left, right, and full
-- ✅ Intermediate RA expressions via assignment (←)
-- ✅ Operator restrictions/requirements (per-question)
-- ✅ Enhanced LaTeX syntax checking and error localization
-- ✅ Detailed, student-friendly feedback messages
+- Self-joins and relation aliasing
+- Outer joins: left, right, and full
+- Intermediate RA expressions via assignment (←)
+- Operator restrictions/requirements (per-question)
+- Enhanced LaTeX syntax checking and error localization
+- Detailed, student-friendly feedback messages
 ---
 
+<pre>
 ## 🗂 Directory Structure
-├── AutograderInstructions.pdf  # PDF instructions for students on how to write RA answers
-├── LICENSE                     # MIT License (with attribution to pyrapt/rapt)
-├── README.md                   # You’re here!
-├── autograder.py               # Main autograding script
-├── grammar.json                # Grammar definitions for RA parsing
-├── rapt/                       # Modified version of pyrapt/rapt (MIT-licensed)
-├── run_autograder              # Entry script for autograding platforms like GradeScope
-├── solution.json               # Ground-truth SQL queries for evaluation
-├── spy.db                      # SQLite database used for executing queries
-├── spySchema.json              # Schema definition for tables in spy.db
-└── student_template.tex        # LaTeX template file for student submissions
+
+<code>
+.
+├── AutograderInstructions.pdf     # Guide for students on LaTeX formatting and RA syntax rules
+├── LICENSE                        # MIT License (includes attribution to pyrapt/rapt)
+├── README.md                      # You’re here!
+├── autograder.py                  # Main autograding script
+├── grammar.json                   # Grammar for RA parsing
+├── rapt/                          # Modified version of pyrapt/rapt
+├── run_autograder                 # Entry script for Gradescope
+├── solution.json                  # Expected SQL solutions
+├── spy.db                         # SQLite DB for executing queries
+├── spySchema.json                 # Table schema used in grading
+└── student_template.tex           # LaTeX template for student submissions
+</code>
+</pre>
 
 ## 🚀 Usage
 
@@ -40,7 +46,7 @@ This project extends [pyrapt/rapt](https://github.com/pyrapt/rapt) with:
 
 Students write their answers using `student_template.tex` and follow formatting rules outlined in `AutograderInstructions.pdf`. And place the `.tex` file in the submissions directory (Automatically done via GradeScope)
 
-2. **Run the Grader**
+### 2. Run the Grader
 
    From the root directory of this repo:
    ```bash

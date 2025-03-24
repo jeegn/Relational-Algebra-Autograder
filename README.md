@@ -4,7 +4,7 @@ This repository contains an **automated grading tool for Relational Algebra (RA)
 
 ---
 
-## 🔧 Features
+## Features
 
 - Parses RA expressions written in LaTeX (e.g., from student submissions).
 - Converts RA expressions to SQL queries using a customized version of `rapt`.
@@ -21,9 +21,8 @@ This project extends [pyrapt/rapt](https://github.com/pyrapt/rapt) with:
 - Detailed, student-friendly feedback messages
 ---
 
+## Directory Structure
 <pre>
-## 🗂 Directory Structure
-
 <code>
 .
 ├── AutograderInstructions.pdf     # Guide for students on LaTeX formatting and RA syntax rules
@@ -40,7 +39,7 @@ This project extends [pyrapt/rapt](https://github.com/pyrapt/rapt) with:
 </code>
 </pre>
 
-## 🚀 Usage
+## Usage
 
 ### 1. Prepare the Submission
 

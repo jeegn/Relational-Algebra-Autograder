@@ -33,7 +33,7 @@ This project extends [pyrapt/rapt](https://github.com/pyrapt/rapt) with:
 ├── rapt/                          # Modified version of pyrapt/rapt
 ├── run_autograder                 # Entry script for Gradescope
 ├── solution.json                  # Expected SQL solutions
-├── spy.db                         # SQLite DB for executing queries
+├── spy.db                         # The Spy Database (by J. Rosinski, T. Barney, E. Bradfield) for executing queries
 ├── spySchema.json                 # Table schema used in grading
 └── student_template.tex           # LaTeX template for student submissions
 </code>

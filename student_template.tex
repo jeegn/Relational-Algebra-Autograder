@@ -1,0 +1,211 @@
+% Only edit between \begin{questions} and \end{questions} tags.
+
+\documentclass[12pt]{exam}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{listings} 
+\usepackage{enumerate}
+\usepackage{blindtext}
+\usepackage{scrextend}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{xcolor}
+
+
+\def\ojoin{\setbox0=\hbox{$\bowtie$}%
+  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+\def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+\def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+\def\fullouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
+
+\newcommand{\chenzhe}[1]{{\it\small\textcolor{purple}{[ {#1}\ --chenzhe ]}}}
+
+\renewcommand{\choiceshook}{%
+    \setlength{\leftmargin}{15pt}%
+}
+\title{CS 348 - Homework 3 - Spring 2025}
+\author{Relational Algebra Template}
+\date{Due on: 2/25/2025}
+
+\begin{document}
+\sloppy
+\maketitle
+\noindent
+Here is some sample Latex code for you in order to get familiar with the Autograding Syntax. Below is the template on how you should write your answers in Latex.\\
+$a \leftarrow \text{place p} \times \text{neighbourhood n}$\\
+$b \leftarrow \sigma_{\text{a.n\_neighbourhood\_id = a.p\_neighbourhood\_id}}(a)$\\
+$c \leftarrow \sigma_{\text{b.n\_name = 'Harlem'}}(b)$\\
+$d \leftarrow \pi_{\text{c.id, c.p\_name}}(c)$\\
+$d$
+
+\begin{questions}
+\question (6 pts) Retrieve all agents who have a “strong” affiliation relationship. For each of those agents, display the name of the affiliation they belong to. Specifically, list the agent’s first name, last name, affiliation title, and the affiliation\_strength value. Use natural join (do not use theta join and cross product). 
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \text{agent} \bowtie \text{affiliationrel} \bowtie \text{affiliation}$\\
+$b \leftarrow \sigma_{\text{a.affiliation\_strength} = 'strong'}(a)$\\
+$c \leftarrow \pi_{\text{b.first, b.last, b.title, b.affiliation\_strength}}(b)$\\
+$c$
+
+% End of your Answer
+\vspace{15 mm}
+	
+\question (6 pts) For agents with a salary greater than 80000, list each agent’s first name, last name, and the skills the agent has. Use cross product (do not use theta join and natural join).
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \text{agent} \times \text{skillrel} \times \text{skill}$\\
+$b \leftarrow \sigma_{\text{a.agent\_agent\_id} = \text{a.skillrel\_agent\_id}
+      \land \text{a.skillrel\_skill\_id} = \text{a.skill\_skill\_id}
+      \land \text{a.salary} > 80000} (a)$\\
+$c \leftarrow \pi_{\text{b.first}, \text{b.last}, \text{b.skill}}(b)$\\
+$c$
+
+
+% End of your Answer
+\vspace{15 mm}
+
+\question (6 pts) Find the teams associated with failed missions where the mission's access\_id is 1. List the mission name and the team name. Use Theta join for this question. Natural join and cross product are not allowed for this question. 
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \text{team} \bowtie_{\text{team.team\_id} = \text{mission.team\_id}} \text{mission}$\\
+$b \leftarrow \sigma_{\text{a.access\_id} = 1 \land \text{a.mission\_status} = 'failed'}(a)$\\
+$c \leftarrow \pi_{\text{b.mission\_name}, \text{b.team\_name}}(b)$\\
+$c$
+
+
+
+% End of your Answer
+\vspace{15 mm}
+
+\question (6 pts) Find all agent\_ids that appear with an affiliation\_strength = `weak' or with affiliation\_strength = `medium' in the affiliationrel table.  Use set operators (intersection, except, or union).
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \sigma_{\text{affiliation\_strength} = 'weak'} (\text{affiliationrel})$\\
+$b \leftarrow \sigma_{\text{affiliation\_strength} = 'medium'} (\text{affiliationrel})$\\
+$c \leftarrow \pi_{\text{a.agent\_id}}(a)$\\
+$d \leftarrow \pi_{\text{b.agent\_id}}(b)$\\
+$e \leftarrow c \cup d$\\
+$e$
+% End of your Answer
+\vspace{15 mm}
+
+\question (8 pts) For agents located in `Italy', find the agents who have the `Firearms' skill but do not have the `Sniper' skill. List the agent\_id, last name, and all of their skills (the firearms skill and other skills they have as well). Use set operators (intersection, except, or union)
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \sigma_{\text{country} = 'Italy'}(\text{agent})$ \\  
+$b \leftarrow \text{skillrel} \bowtie \text{skill}$ \\  
+$c \leftarrow a \bowtie b$ \\  
+$d \leftarrow \sigma_{\text{c.skill} = 'Firearms'}(c)$ \\  
+$e \leftarrow \pi_{\text{d.agent\_id}, \text{d.last}}(d)$ \\  
+$f \leftarrow \sigma_{\text{c.skill} = 'Sniper'}(c)$ \\  
+$g \leftarrow \pi_{\text{f.agent\_id}, \text{f.last}}(f)$ \\  
+$h \leftarrow e - g $\\  
+$i \leftarrow \pi_{\text{c.agent\_id}, \text{c.last}, \text{c.skill}}(c)$ \\  
+$j \leftarrow h \bowtie i$ \\  
+$k \leftarrow \pi_{\text{j.agent\_id}, \text{j.last}, \text{j.skill}}(j)$ \\
+$k$ \\
+% End of your Answer
+\vspace{15 mm}
+
+\question (6 pts) For all agents, list the agent\_id, first and last name, affiliation\_strength and the corresponding affiliation title. You also need to list agents that do not have any affiliation.
+
+\textbf{Answer:}  \\
+% Your Answer Here
+$a \leftarrow \text{agent} \leftouterjoin_{\text{agent.agent\_id} = \text{affiliationrel.agent\_id}} \text{affiliationrel}$ \\
+$b \leftarrow a \leftouterjoin_{\text{a.aff\_id} = \text{affiliation.aff\_id}} \text{affiliation}$ \\
+$c \leftarrow \pi_{\text{b.agent\_agent\_id}, \text{b.first}, \text{b.last}, \text{b.affiliation\_strength}, \text{b.title}}(b)$ \\
+$c$
+% End of your Answer
+\vspace{15 mm}
+
+\question (8 pts) List the agent\_id, first and last name, country, and salary of the agents who have the highest salary in each country. 
+Remember not to use any aggregate functions. Hint: a self join of the table is needed for this query.
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \rho_{\text{agent\_a}}(\text{agent}) \times \rho_{\text{agent\_b}}(\text{agent})$\\
+$b \leftarrow \sigma_{\text{a.agent\_a\_country} = \text{a.agent\_b\_country} \land \text{a.agent\_a\_salary} < \text{a.agent\_b\_salary}}(a)$\\
+$c \leftarrow \pi_{\text{agent\_a.agent\_id}, \text{agent\_a.first}, \text{agent\_a.last}, \text{agent\_a.country}, \text{agent\_a.salary}}(\rho_{\text{agent\_a}}(\text{agent}))$\\
+$d \leftarrow \pi_{\text{b.agent\_a\_agent\_id}, \text{b.agent\_a\_first}, \text{b.agent\_a\_last}, \text{b.agent\_a\_country}, \text{b.agent\_a\_salary}}(b)$\\
+$e \leftarrow c - d$\\
+$e$
+
+% End of your Answer
+\vspace{15 mm}
+
+\question (9 pts) Find any pair of different agents a1 and a2 who belong to the same affiliation and have the same clearance\_id. List the agent\_id, name, affiliation, and clearance\_id for both a1 and a2. 
+Use a cross product or a join.
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \text{agent} \bowtie_{\text{agent.agent\_id} = \text{affiliationrel.agent\_id}} \text{affiliationrel}$ \\
+$b \leftarrow a \bowtie_{\text{a.aff\_id} = \text{affiliation.aff\_id}} \text{affiliation}$ \\
+$c \leftarrow b \times \text{agent}$ \\
+$d \leftarrow c \bowtie_{\text{c.agent\_id} = \text{afr.agent\_id}} \text{affiliationrel afr} $\\
+$e \leftarrow d \bowtie_{\text{d.aff\_id} = \text{affiliation.aff\_id}} \text{affiliation}$ \\
+$f \leftarrow \sigma_{\text{b.clearance\_id} = \text{e.clearance\_id} \land \text{b.agent\_id} \neq \text{e.agent\_id} \land \text{b.aff\_id} = \text{e.aff\_id}}(e) $\\
+$g \leftarrow \pi_{\text{b.agent\_id}, \text{b.first}, \text{b.last}, \text{b.title}, \text{b.clearance\_id}, \text{e.agent\_id}, \text{e.first}, \text{e.last}, \text{e.title}, \text{e.clearance\_id}}(f)$ \\
+$g$
+% End of your Answer
+\vspace{15 mm}
+
+\question (10 pts) List the agent\_id of agents who speak all languages. One approach for this question uses a set operator.
+
+\textbf{Answer:} \\
+% Your Answer Here
+$a \leftarrow \pi_{\text{lang\_id}, \text{agent\_id}} (\text{languagerel})$\\
+$b \leftarrow \pi_{\text{lang\_id}} (\text{language})$\\
+$c \leftarrow b \times \pi_{\text{agent\_id}}(a)$\\
+$d \leftarrow c - a$\\
+$e \leftarrow \pi_{\text{agent\_id}}(a) - \pi_{\text{agent\_id}}(d)$\\
+$e$
+% End of your Answer
+\vspace{15 mm}
+
+\question (15 pts) 
+Note that this question is not autograded. \\
+Suppose we have three relations:
+\begin{itemize}
+    \item P(A,B) with $p$ tuples, P.A is a key in P.
+    \item Q(A,C) with $q$ tuples, Q.A is foreign keys referencing P.A.
+    \item R(A,D) with $r$ tuples, R.A is foreign keys referencing P.A.
+    \item $p>q>r>0$
+\end{itemize}
+
+Find the minimum and maximum numbers of tuples that the following expressions can have. You can use numbers (e.g., 0, 1, 2,..) and/or expressions/functions using the variables p and q (e.g., p, q, p+q, min(p,q), ... etc.). 
+\\ \\
+
+\textbf{Questions:}
+
+\begin{enumerate}
+    \item $(\pi_{A} P \cap \pi_{A} Q) $
+    \item $(\pi_{A} P \cap \pi_{A} Q) - \pi_{A} R$
+    \item $(P \cap Q) $
+    \item $(\pi_{A} P \cup \pi_{A} Q) $
+    \item $(P\leftouterjoin_{P.A=Q.A}Q) - (P\bowtie_{P.A=Q.A}Q)$
+\end{enumerate}
+
+\textbf{Answers:} 
+% Place your answers after \item
+\begin{enumerate}
+    \item 
+    \item 
+    \item 
+    \item 
+    \item 
+\end{enumerate}
+
+\end{questions}
+\bigskip 
+\noindent
+
+
+\end{document}
